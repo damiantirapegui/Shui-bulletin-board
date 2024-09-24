@@ -19,7 +19,7 @@ provider:
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
-          Resource: arn:aws:dynamodb:${aws:region}:*:table/Shui
+          Resource: arn:aws:dynamodb:${aws:region}:*:table/Shui-border
 
 functions:
   hello:
@@ -36,20 +36,23 @@ functions:
           path: /fetchMessages
           method: get
 
+  ChangeMessage:
+    handler: functions/changeMessage.changeMessage
+    events:
+      - httpApi:
+          path: /changeMessage/{shuiId}
+          method: put
+
 resources:
   Resources:
     TodoTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: Shui
+        TableName: Shui-border
         AttributeDefinitions:
           - AttributeName: "shuiId"
-            AttributeType: "S"
-          - AttributeName: "timeStamp"
             AttributeType: "S"
         KeySchema:
           - AttributeName: "shuiId"
             KeyType: HASH
-          - AttributeName: "timeStamp"
-            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

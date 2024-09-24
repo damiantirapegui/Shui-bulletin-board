@@ -1,13 +1,14 @@
 const dynamoDb = require("../dynamoClient.js");
 const response = require("../responseCodes.js");
 const { v4: uuidv4 } = require("uuid");
-const id = uuidv4();
+
 const timeAndDate = new Date();
 
 module.exports.createMessage = async (event) => {
+  const id = uuidv4();
   const { username, text } = JSON.parse(event.body);
   const params = {
-    TableName: "Shui",
+    TableName: "Shui-border",
     Item: {
       shuiId: id,
       username: username,

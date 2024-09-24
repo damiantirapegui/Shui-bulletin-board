@@ -3,7 +3,7 @@ const response = require("../responseCodes.js");
 
 module.exports.fetchMessages = async () => {
   const params = {
-    TableName: "Shui",
+    TableName: "Shui-border",
   };
 
   try {
