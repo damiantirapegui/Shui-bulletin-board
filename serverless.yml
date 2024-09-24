@@ -20,7 +20,9 @@ provider:
             - dynamodb:GetItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
-          Resource: arn:aws:dynamodb:${aws:region}:*:table/Shui-border
+          Resource:
+            - arn:aws:dynamodb:${aws:region}:*:table/Shui-border
+            - arn:aws:dynamodb:${aws:region}:*:table/Shui-border/index/username-index
 
 functions:
   hello:
@@ -44,6 +46,13 @@ functions:
           path: /changeMessage/{shuiId}
           method: put
 
+  FetchMessageByUser:
+    handler: functions/fetchMessageByUser.fetchMessageByUser
+    events:
+      - httpApi:
+          path: /fetchMessageByUser/{username}
+          method: get
+
 resources:
   Resources:
     TodoTable:
@@ -53,7 +62,16 @@ resources:
         AttributeDefinitions:
           - AttributeName: "shuiId"
             AttributeType: "S"
+          - AttributeName: "username"
+            AttributeType: "S"
         KeySchema:
           - AttributeName: "shuiId"
             KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: "username-index"
+            KeySchema:
+              - AttributeName: "username"
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
