@@ -23,11 +23,18 @@ provider:
 
 functions:
   hello:
-    handler: createMessage.createMessage
+    handler: functions/createMessage.createMessage
     events:
       - httpApi:
           path: /createMessage
           method: post
+
+  FetchMessages:
+    handler: functions/fetchMessages.fetchMessages
+    events:
+      - httpApi:
+          path: /fetchMessages
+          method: get
 
 resources:
   Resources:

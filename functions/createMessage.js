@@ -1,5 +1,5 @@
-const dynamoDb = require("./dynamoClient.js");
-const response = require("./responseCodes.js");
+const dynamoDb = require("../dynamoClient.js");
+const response = require("../responseCodes.js");
 const { v4: uuidv4 } = require("uuid");
 const id = uuidv4();
 const timeAndDate = new Date();
