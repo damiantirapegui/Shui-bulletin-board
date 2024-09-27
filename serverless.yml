@@ -31,6 +31,7 @@ functions:
       - httpApi:
           path: /createMessage
           method: post
+          cors: true
 
   FetchMessages:
     handler: functions/fetchMessages.fetchMessages
@@ -38,6 +39,7 @@ functions:
       - httpApi:
           path: /fetchMessages
           method: get
+          cors: true
 
   ChangeMessage:
     handler: functions/changeMessage.changeMessage
@@ -45,6 +47,7 @@ functions:
       - httpApi:
           path: /changeMessage/{shuiId}
           method: put
+          cors: true
 
   FetchMessageByUser:
     handler: functions/fetchMessageByUser.fetchMessageByUser
@@ -52,6 +55,7 @@ functions:
       - httpApi:
           path: /fetchMessageByUser/{username}
           method: get
+          cors: true
 
 resources:
   Resources:
